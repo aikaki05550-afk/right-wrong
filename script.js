@@ -35,6 +35,7 @@ const cake = document.getElementById("cake");
 const counter = document.getElementById("counter");
 const hintText = document.getElementById("hintText");
 const currentQEl = document.getElementById("currentQ");
+const hintBtn = document.getElementById("hintBtn");
 
 function loadQuestion() {
     answersEl.innerHTML = "";
@@ -57,6 +58,10 @@ function loadQuestion() {
 }
 
 loadQuestion();
+
+hintBtn.onclick = () => {
+    hintText.textContent = "HINT: " + questions[current].hint;
+};
 
 cake.onclick = () => {
     if (cakeClicks < REQUIRED) {

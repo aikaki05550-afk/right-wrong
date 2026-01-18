@@ -19,7 +19,61 @@ const questions = [
         answers: ["Yuji", "Sukuna", "Gojo", "Megumi"],
         correct: 2,
         hint: "He has Six Eyes"
-    }
+    },
+    {
+    q: "Who can transform into a Titan?",
+    answers: ["Levi", "Mikasa", "Eren", "Armin"],
+    correct: 2,
+    hint: "He wants freedom"
+    },
+    {
+    q: "What is Luffy's dream?",
+    answers: ["Become Marine", "Find All Blue", "Become Pirate King", "Defeat Shanks"],
+    correct: 2,
+    hint: "The freest man on the sea"
+},
+{
+    q: "What fruit did Luffy eat?",
+    answers: ["Mera Mera no Mi", "Gomu Gomu no Mi", "Ope Ope no Mi", "Yami Yami no Mi"],
+    correct: 1,
+    hint: "Makes his body rubber"
+},
+{
+    q: "Who was Naruto's sensei?",
+    answers: ["Iruka", "Kakashi", "Jiraiya", "Asuma"],
+    correct: 1,
+    hint: "He copies jutsu with Sharingan"
+},
+{
+    q: "What is the name of Naruto's signature jutsu?",
+    answers: ["Chidori", "Rasengan", "Amaterasu", "Shadow Clone"],
+    correct: 1,
+    hint: "Taught by his father"
+},
+{
+    q: "What breathing style does Tanjiro use first?",
+    answers: ["Flame", "Water", "Thunder", "Wind"],
+    correct: 1,
+    hint: "Looks like flowing waves"
+},
+{
+    q: "Who is the King of Curses?",
+    answers: ["Gojo", "Geto", "Sukuna", "Toji"],
+    correct: 2,
+    hint: "Lives inside Yuji"
+},
+{
+    q: "What beast is sealed inside Naruto?",
+    answers: ["Shukaku", "Kurama", "Gyuki", "Matatabi"],
+    correct: 1,
+    hint: "Nine tails"
+},
+{
+    q: "Who is Naruto's rival?",
+    answers: ["Gaara", "Sasuke", "Neji", "Rock Lee"],
+    correct: 1,
+    hint: "Uchiha clan survivor"
+}
 ];
 
 let current = 0;

@@ -34,6 +34,7 @@ const boom = document.getElementById("boom");
 const cake = document.getElementById("cake");
 const counter = document.getElementById("counter");
 const hintText = document.getElementById("hintText");
+const currentQEl = document.getElementById("currentQ");
 
 function loadQuestion() {
     answersEl.innerHTML = "";
@@ -41,19 +42,21 @@ function loadQuestion() {
     hintText.textContent = "";
     cakeClicks = 0;
     counter.textContent = "0 / 100";
+    currentQEl.textContent = current + 1;
 
     questions[current].answers.forEach((text, i) => {
         const btn = document.createElement("button");
         btn.textContent = text;
         btn.onclick = () => {
-    clickSound.currentTime = 0;
-    clickSound.play();
-    checkAnswer(i);
-};
-
+            clickSound.currentTime = 0;
+            clickSound.play();
+            checkAnswer(i);
+        };
         answersEl.appendChild(btn);
     });
 }
+
+loadQuestion();
 
 cake.onclick = () => {
     if (cakeClicks < REQUIRED) {
@@ -76,7 +79,11 @@ function checkAnswer(index) {
             answersEl.innerHTML = "";
         }
     } else {
-        function explode() {
+        explode();
+    }
+}
+
+function explode() {
     loserEl.style.display = "flex";
 
     siren.currentTime = 0;
@@ -93,19 +100,3 @@ function checkAnswer(index) {
         loadQuestion();
     }, 2000);
 }
-
-}
-
-function explode() {
-    loserEl.style.display = "flex";
-    boom.currentTime = 0;
-    boom.play();
-
-    setTimeout(() => {
-        loserEl.style.display = "none";
-        current = 0;
-        loadQuestion();
-    }, 2000);
-}
-
-loadQuestion();

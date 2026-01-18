@@ -78,6 +78,8 @@ const questions = [
 
 let current = 0;
 let cakeClicks = 0;
+let score = 0;
+let streak = 0;
 const REQUIRED = 100;
 
 const questionEl = document.getElementById("question");
@@ -105,7 +107,7 @@ function loadQuestion() {
         btn.onclick = () => {
             clickSound.currentTime = 0;
             clickSound.play();
-            checkAnswer(i);
+            checkAnswer(i, btn);
         };
         answersEl.appendChild(btn);
     });
@@ -128,18 +130,40 @@ cake.onclick = () => {
     }
 };
 
-function checkAnswer(index) {
+function checkAnswer(index, clickedBtn) {
+    const allButtons = document.querySelectorAll("#answers button");
+    allButtons.forEach(btn => btn.disabled = true);
+    
     if (index === questions[current].correct) {
-        current++;
-        if (current < questions.length) {
-            loadQuestion();
-        } else {
-            questionEl.textContent = "YOU WIN 🔥";
-            answersEl.innerHTML = "";
-        }
+        score++;
+        streak++;
+        clickedBtn.style.background = "#00d900";
+        
+        setTimeout(() => {
+            current++;
+            if (current < questions.length) {
+                loadQuestion();
+            } else {
+                showWinScreen();
+            }
+        }, 800);
     } else {
-        explode();
+        streak = 0;
+        clickedBtn.style.background = "#ff0000";
+        const correctBtn = allButtons[questions[current].correct];
+        correctBtn.style.background = "#00d900";
+        
+        setTimeout(() => {
+            explode();
+        }, 1000);
     }
+}
+
+function showWinScreen() {
+    const percentage = Math.round((score / questions.length) * 100);
+    questionEl.textContent = `YOU WIN 🔥`;
+    questionEl.innerHTML += `<div style="font-size: 24px; margin-top: 20px;">Final Score: ${score}/${questions.length} (${percentage}%)</div>`;
+    answersEl.innerHTML = `<button onclick="location.reload()" style="padding: 20px 40px; font-size: 20px; background: #00d900; margin-top: 20px;">PLAY AGAIN</button>`;
 }
 
 function explode() {

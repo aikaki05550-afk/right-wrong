@@ -1,5 +1,13 @@
+// Audio elements
 const clickSound = document.getElementById("clickSound");
 const siren = document.getElementById("siren");
+const boom = document.getElementById("boom");
+
+// Constants
+const REQUIRED = 100;
+const CORRECT_DELAY = 800;
+const INCORRECT_DELAY = 1000;
+const EXPLODE_DURATION = 2000;
 
 const questions = [
     {
@@ -76,22 +84,30 @@ const questions = [
 }
 ];
 
+// Game state
 let current = 0;
 let cakeClicks = 0;
 let score = 0;
 let streak = 0;
-const REQUIRED = 100;
 
+// DOM elements
 const questionEl = document.getElementById("question");
 const answersEl = document.getElementById("answers");
 const loserEl = document.getElementById("loser");
-const boom = document.getElementById("boom");
 
 const cake = document.getElementById("cake");
 const counter = document.getElementById("counter");
 const hintText = document.getElementById("hintText");
 const currentQEl = document.getElementById("currentQ");
 const hintBtn = document.getElementById("hintBtn");
+
+// Helper function to safely play audio
+function playSound(audio) {
+    if (audio) {
+        audio.currentTime = 0;
+        audio.play().catch(err => console.warn("Audio play failed:", err));
+    }
+}
 
 function loadQuestion() {
     answersEl.innerHTML = "";
@@ -104,9 +120,9 @@ function loadQuestion() {
     questions[current].answers.forEach((text, i) => {
         const btn = document.createElement("button");
         btn.textContent = text;
+        btn.setAttribute("aria-label", `Answer: ${text}`);
         btn.onclick = () => {
-            clickSound.currentTime = 0;
-            clickSound.play();
+            playSound(clickSound);
             checkAnswer(i, btn);
         };
         answersEl.appendChild(btn);
@@ -146,7 +162,7 @@ function checkAnswer(index, clickedBtn) {
             } else {
                 showWinScreen();
             }
-        }, 800);
+        }, CORRECT_DELAY);
     } else {
         streak = 0;
         clickedBtn.style.background = "#ff0000";
@@ -155,7 +171,7 @@ function checkAnswer(index, clickedBtn) {
         
         setTimeout(() => {
             explode();
-        }, 1000);
+        }, INCORRECT_DELAY);
     }
 }
 
@@ -169,11 +185,8 @@ function showWinScreen() {
 function explode() {
     loserEl.style.display = "flex";
 
-    siren.currentTime = 0;
-    siren.play();
-
-    boom.currentTime = 0;
-    boom.play();
+    playSound(siren);
+    playSound(boom);
 
     setTimeout(() => {
         loserEl.style.display = "none";
@@ -181,5 +194,5 @@ function explode() {
         siren.currentTime = 0;
         current = 0;
         loadQuestion();
-    }, 2000);
+    }, EXPLODE_DURATION);
 }

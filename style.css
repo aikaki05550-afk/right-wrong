@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
+    text-align: center;
+}
+
+#quiz {
+    margin-top: 100px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    background: #222;
+    color: white;
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+button:hover {
+    background: red;
+}
+
+#hintPanel {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    text-align: left;
+}
+
+#cake {
+    font-size: 60px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+#counter {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#hintText {
+    color: yellow;
+    font-size: 16px;
+    max-width: 200px;
+}
+
+#loser {
+    position: fixed;
+    inset: 0;
+    background: red;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    animation: flash 0.2s infinite, shake 0.1s infinite;
+    z-index: 999;
+}
+
+#loser span {
+    font-size: 100px;
+    font-weight: bold;
+    color: black;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.4; }
+    100% { opacity: 1; }
+}
+
+@keyframes shake {
+    0% { transform: translate(0); }
+    25% { transform: translate(10px, -10px); }
+    50% { transform: translate(-10px, 10px); }
+    75% { transform: translate(10px, 10px); }
+    100% { transform: translate(0); }
+}
